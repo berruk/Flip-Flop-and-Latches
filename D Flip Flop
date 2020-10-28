@@ -1,0 +1,29 @@
+
+module norgate(output o,input a,input b);
+  assign o = ~(a | b);
+endmodule
+
+module nandgate(output o,input a,input b);
+  assign o = ~(a & b);
+endmodule
+
+module notgate( input A, output B);
+  assign B = ~A;
+    
+endmodule
+
+module DLatch(input D, input e, output Q, output Qneg);
+  wire R;
+  notgate N1(D,R);
+  nandgate na1(o1, D , e);
+  nand na2(o2, R , e);
+  nand na3(Q, o1, Qneg);
+  nand na4(Qneg, o2, Q);
+endmodule 
+
+module DFlipFlop ( input D, input clk,output Q, output Qneg);
+  wire Qm, Qmn, c1;
+  notgate N1(clk,c1);
+  DLatch D1(D, clk, Qm, Qmn);
+  DLatch D2(Qm, c1, Q, Qneg);
+endmodule
