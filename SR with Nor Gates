@@ -1,0 +1,8 @@
+module norgate(output o,input a,input b);
+  assign o = ~(a | b);
+endmodule
+
+module SRwithNOR (input R, input S, output Q, output Qneg);
+  norgate n1(Q, R, Qneg);
+  norgate n2(Qneg, S, Q);
+endmodule
