@@ -1,0 +1,11 @@
+
+module nandgate(output o,input a,input b);
+  assign o = ~(a & b);
+endmodule
+
+module SRwithNANDEN(input R, input S, input e, output Q, output Qneg);
+  nandgate n1(o1, S, e);
+  nandgate n2(o2, R, e);
+  nandgate n3(Q, o1, Qneg);
+  nandgate n4(Qneg, o2, Q);
+endmodule 
